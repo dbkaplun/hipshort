@@ -33,6 +33,10 @@ module.exports.routes = {
 
 
   // Custom routes here...
+  '/~:slug': {
+    controller: 'URLController',
+    action: 'go'
+  },
 
 
   // If a request to a URL doesn't match any of the custom routes above,
