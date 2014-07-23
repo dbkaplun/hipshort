@@ -5,6 +5,7 @@
   "description": "Hipster URL shortener",
   "keywords": [],
   "dependencies": {
+    "connect-redis": "~1.4.7",
     "ejs": "~0.8.4",
     "grunt": "0.4.2",
     "grunt-bower": "~0.13.4",
@@ -23,6 +24,7 @@
     "rc": "~0.3.3",
     "sails": "0.10.0-rc8",
     "sails-disk": "~0.10.0",
+    "sails-postgresql": "~0.10.0-rc4",
     "slug": "~0.5.0"
   },
   "scripts": {
