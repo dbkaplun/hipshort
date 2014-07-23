@@ -27,3 +27,4 @@ bower_components
 
 # SailsJS
 .tmp
+config/local.js
