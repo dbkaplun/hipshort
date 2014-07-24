@@ -2,10 +2,10 @@ rivets.formatters.not = function (value) {
   return !value;
 };
 
-rivets.formatters.preventDefault = function (value) {
+rivets.formatters.preventDefault = function (fn) {
   return function (evt) {
     evt.preventDefault();
-    value.apply(this, arguments);
+    fn.apply(this, arguments);
     return false;
   };
 };

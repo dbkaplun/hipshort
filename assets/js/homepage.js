@@ -6,6 +6,11 @@ jQuery(function ($) {
     err: null
   };
 
+  rivets.formatters.isURLError = function (err) {
+    return (((err || {}).invalidAttributes || {}).url || []).some(function (urlError) {
+      return urlError.rule === 'url';
+    });
+  };
   rivets.bind($('#homepage'), {
     data: data,
     controller: {
@@ -21,6 +26,11 @@ jQuery(function ($) {
             data.shortURL = '';
           }
         });
+      },
+      etsy: function () {
+        data.err = null;
+        data.shortURL = '';
+        data.longURL = 'etsy.com';
       }
     }
   });

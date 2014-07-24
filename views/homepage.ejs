@@ -8,7 +8,7 @@
     <form rv-on-submit="controller.shorten | preventDefault" class="form-horizontal" role="form">
       <div class="form-group row">
         <label for="long-url" class="sr-only">Long URL</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" rv-class-has-error="data.err | isURLError">
           <input id="long-url" name="url" rv-value="data.longURL" placeholder="ex: http://pinterest.com" autofocus class="form-control">
         </div>
         <div class="col-sm-2">
@@ -26,7 +26,12 @@
       </div>
       <div rv-class-hide="data.err | not" class="form-group hide">
         <hr>
-        <p>Couldn't shorten that one. Our team of highly trained baristas will investigate this error.</p>
+        <p rv-show="data.err | isURLError">
+          Invalid URL. Try "<a href="" rv-on-click="controller.etsy | preventDefault">etsy.com</a>".
+        </p>
+        <p rv-show="data.err | isURLError | not">
+          Couldn't shorten that one. Our team of highly trained baristas will investigate this error.
+        </p>
       </div>
     </form>
   </div>
