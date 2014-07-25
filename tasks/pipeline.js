@@ -28,12 +28,12 @@ var jsFilesToInject = [
   // are brought in here
   'js/dependencies/jquery.js',
   'js/dependencies/bootstrap.js',
-  'js/dependencies/rivets.js',
+  'js/dependencies/vue.js',
   'js/dependencies/**/*.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
-  'js/rivets/formatters.js',
+  'js/vue/filters.js',
   'js/**/*.js'
 ];
 
