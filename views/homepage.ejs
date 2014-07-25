@@ -23,11 +23,12 @@
             <input id="short-url" rv-value="data.shortURL" readonly class="form-control">
           </div>
         </div>
+        <small class="text-muted">You're welcome.</small>
       </div>
       <div rv-class-hide="data.err | not" class="form-group hide">
         <hr>
         <p rv-show="data.err | isURLError">
-          Invalid URL. Try "<a href="" rv-on-click="controller.etsy | preventDefault">etsy.com</a>".
+          Invalid URL. Try something like "<a href="" rv-on-click="controller.etsy | preventDefault">etsy.com</a>".
         </p>
         <p rv-show="data.err | isURLError | not">
           Couldn't shorten that one. Our team of highly trained baristas will investigate this error.

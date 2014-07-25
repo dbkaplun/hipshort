@@ -11,13 +11,12 @@ jQuery(function ($) {
       return urlError.rule === 'url';
     });
   };
-  rivets.bind($('#homepage'), {
+  var homepageView = rivets.bind($('#homepage'), {
     data: data,
     controller: {
       shorten: function () {
-        var longURL = data.longURL;
-        if (!longURL.match(URL_SCHEME_RE)) longURL = 'http://' + longURL;
-        io.socket.get('/url/shorten', {url: longURL}, function (shortened, res) {
+        if (!data.longURL.match(URL_SCHEME_RE)) data.longURL = 'http://' + data.longURL;
+        io.socket.get('/url/shorten', {url: data.longURL}, function (shortened, res) {
           if (res.statusCode === 200) {
             data.err = null;
             data.shortURL = location.origin + '/~' + shortened.slug;
@@ -31,6 +30,7 @@ jQuery(function ($) {
         data.err = null;
         data.shortURL = '';
         data.longURL = 'etsy.com';
+        homepageView.models.controller.shorten();
       }
     }
   });
