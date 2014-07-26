@@ -16,7 +16,7 @@ new Vue({
       if (!self.longURL.match(URL_SCHEME_RE)) self.longURL = 'http://' + self.longURL;
       io.socket.get('/url/shorten', {url: self.longURL}, function (shortened, res) {
         if (res.statusCode === 200) {
-          self.shortURL = location.origin + '/~' + shortened.slug;
+          self.shortURL = location.origin + '/' + shortened.slug;
         } else {
           self.err = shortened;
         }

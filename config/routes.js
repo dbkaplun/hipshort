@@ -33,7 +33,7 @@ module.exports.routes = {
 
 
   // Custom routes here...
-  '/~:slug': {
+  '/~?:slug': { // retains backwards-compatibility with old ~-prefixed route
     controller: 'URLController',
     action: 'go'
   },
