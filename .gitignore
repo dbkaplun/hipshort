@@ -28,3 +28,6 @@ build/Release
 # SailsJS
 .tmp
 config/local.js
+
+# Google Webmaster Tools
+assets/google*.html
