@@ -27,12 +27,12 @@ module.exports = {
       });
   },
   getSlug: function (id) {
-    id -= 1;
     var slugParts = [];
     do {
+      id -= 1;
       slugParts.push(URL.SLUG_WORDS[id % URL.SLUG_WORDS.length]);
       id = Math.floor(id / URL.SLUG_WORDS.length);
-    } while (id);
+    } while (id > 0);
     return slug(slugParts.join(' ')).toLowerCase();
   },
   SLUG_WORDS: [
@@ -40,9 +40,9 @@ module.exports = {
     "Blue Bottle", "Brooklyn", "Bushwick", "Carles", "Cosby sweater", "DIY",
     "Disrupt", "Echo Park", "Etsy", "Godard", "High Life", "Intelligentsia",
     "Kickstarter", "Marfa", "McSweeney\'s", "Neutra", "PBR&B", "Pinterest",
-    "Schlitz", "Semiotics", "Shoreditch", "Thundercats", "Tonx", "Truffaut",
-    "VHS", "Vice", "Wayfarers", "Wes Anderson", "Williamsburg", "XOXO", "YOLO",
-    "actually", "art party", "artisan", "asymmetrical", "axe", "banjo", "beard",
+    "Schlitz", "Shoreditch", "Thundercats", "Tonx", "Truffaut", "VHS", "Vice",
+    "Wayfarers", "Wes Anderson", "Williamsburg", "XOXO", "YOLO", "actually",
+    "art party", "artisan", "asymmetrical", "axe", "banjo", "beard",
     "before they sold out", "bicycle rights", "biodiesel", "bitters", "blog",
     "brunch", "butcher", "cardigan", "chambray", "chia", "church-key",
     "cornhole", "craft beer", "cray", "cred", "crucifix", "deep v", "denim",
