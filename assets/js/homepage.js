@@ -7,11 +7,13 @@ new Vue({
     shortURL: '',
     err: null
   },
+  created: function () {
+    this.$watch('longURL', this.reset);
+  },
   methods: {
     shorten: function (url) {
       var self = this;
-      self.err = null;
-      self.shortURL = '';
+      self.reset();
       if (url) self.longURL = url;
       if (!self.longURL.match(URL_SCHEME_RE)) self.longURL = 'http://' + self.longURL;
       io.socket.get('/url/shorten', {url: self.longURL}, function (shortened, res) {
@@ -22,13 +24,16 @@ new Vue({
         }
       });
     },
+    reset: function () {
+      this.shortURL = '';
+      this.err = null;
+    },
     select: function (evt) { evt.target.select(); }
   },
   computed: {
     isValidURL: {
       $get: function () {
-        var self = this;
-        return (((self.err || {}).invalidAttributes || {}).url || []).every(function (urlError) {
+        return (((this.err || {}).invalidAttributes || {}).url || []).every(function (urlError) {
           return urlError.rule !== 'url';
         });
       }

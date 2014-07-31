@@ -6,13 +6,15 @@
   </div>
   <div class="container">
     <form v-on="submit: shorten() | preventDefault" class="form-horizontal" role="form">
-      <div class="form-group row">
-        <label for="long-url" class="sr-only">Long URL</label>
-        <div class="col-sm-10" v-class="has-error: !isValidURL">
-          <input id="long-url" name="url" v-model="longURL" placeholder="ex: http://pinterest.com" autofocus class="form-control">
-        </div>
-        <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-link"></span> Shorten</button>
+      <div class="form-group row" v-class="has-error: !isValidURL">
+        <div class="col-sm-12">
+          <label for="long-url" class="control-label sr-only">Long URL</label>
+          <div id="long-url-group" class="input-group">
+            <input id="long-url" name="url" v-model="longURL" placeholder="ex: http://pinterest.com" autofocus class="form-control">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary" v-class="btn-primary: isValidURL, btn-error: !isValidURL" v-attr="disabled: !isValidURL"><span class="glyphicon glyphicon-link"></span></button>
+            </span>
+          </div>
         </div>
       </div>
       <div v-class="hide: !shortURL" class="form-group row hide">
