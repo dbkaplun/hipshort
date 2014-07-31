@@ -5,7 +5,7 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-var slug = require('slug');
+var slugify = require('slug');
 
 module.exports = {
   attributes: {
@@ -17,23 +17,22 @@ module.exports = {
     slug: {type: 'string', unique: true, lowercase: true}
   },
   beforeCreate: function (values, next) {
-    URL.find()
-      .sort('id desc')
-      .limit(1)
-      .exec(function (err, urls) {
-        if (err) return next(err);
-        values.slug = URL.getSlug(((urls[0] || {}).id || 0) + 1);
-        next();
-      });
+    URL.getUnusedSlug(function (err, slug) {
+      if (err) return next(err);
+      values.slug = slug;
+      next();
+    });
   },
-  getSlug: function (id) {
-    var slugParts = [];
-    do {
-      id -= 1;
-      slugParts.push(URL.SLUG_WORDS[id % URL.SLUG_WORDS.length]);
-      id = Math.floor(id / URL.SLUG_WORDS.length);
-    } while (id > 0);
-    return slug(slugParts.join(' ')).toLowerCase();
+  getUnusedSlug: function (cb, slugParts) {
+    if (!slugParts) slugParts = [];
+    slugParts.push(URL.SLUG_WORDS[Math.floor(Math.random() * URL.SLUG_WORDS.length)]);
+    var slug = slugify(slugParts.join(' ')).toLowerCase();
+    URL.find({slug: slug}).exec(function (err, urls) {
+      if (err) return cb(err);
+      return urls.length
+         ? URL.getUnusedSlug(cb, slugParts)
+         : cb(null, slug);
+    });
   },
   SLUG_WORDS: [
     "3 wolf moon", "8-bit", "90\'s", "American Apparel", "Austin", "Banksy",
