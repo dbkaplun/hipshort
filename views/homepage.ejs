@@ -33,7 +33,8 @@
       <div v-class="hide: !err" class="form-group hide">
         <hr>
         <p v-show="!isValidURL">Invalid URL. Try something like "<a href="" v-on="click: shorten($event.target.textContent) | preventDefault">etsy.com</a>".</p>
-        <p v-show="isValidURL">Couldn't shorten that one. Our team of highly trained baristas will investigate this error.</p>
+        <p v-show="!isFromRemoteHost">That URL's from Hipshort, so it was cool before it was cool.</p>
+        <p v-show="isValidURL && isFromRemoteHost">Couldn't shorten that one. Our team of highly trained baristas will investigate this error.</p>
       </div>
     </form>
   </div>

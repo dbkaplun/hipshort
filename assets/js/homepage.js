@@ -37,6 +37,9 @@ new Vue({
           return urlError.rule !== 'url';
         });
       }
+    },
+    isFromRemoteHost: {
+      $get: function () { return (this.err || {}).error !== "can't shorten URLs from this host"; }
     }
   }
 });
