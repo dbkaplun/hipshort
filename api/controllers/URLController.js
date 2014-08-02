@@ -11,7 +11,13 @@ var PG_UNIQUE_VALIDATION = '23505'; // http://www.postgresql.org/docs/8.2/static
 module.exports = {
 	shorten: function (req, res) {
 		var longURL = req.param('url');
-		if (_.contains([req.header('host'), 'localhost'], parseURL(longURL).hostname)) return res.json({error: "can't shorten URLs from this host"}, 400);
+		var longURLHost = parseURL(longURL).host;
+		if (_.chain(req.headers)
+			.merge(req.socket.handshake.headers)
+			.some(function (value, name) {
+				return _.contains(['host', 'x-forwarded-host'], name.toLowerCase()) && value === longURLHost;
+			})
+			.value()) return res.json({error: "can't shorten URLs from this host"}, 400);
 		URL.create({url: longURL}).exec(function (err, url) {
 			if (err) {
 				var invalidURLRules = _.pluck((err.invalidAttributes || {}).url, 'rule');
