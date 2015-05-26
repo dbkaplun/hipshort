@@ -1,9 +1,9 @@
 {
   "name": "hipshort",
   "version": "0.0.0",
-  "homepage": "https://github.com/beardtree/hipshort",
+  "homepage": "https://github.com/dbkaplun/hipshort",
   "authors": [
-    "Dan Kaplun <dan@beardtree.com>"
+    "Dan Kaplun <dbkaplun@gmail.com>"
   ],
   "description": "Hipster URL shortener",
   "main": "app.js",

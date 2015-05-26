@@ -35,8 +35,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/beardtree/hipshort.git"
+    "url": "git://github.com/dbkaplun/hipshort.git"
   },
-  "author": "Dan Kaplun <dan@beardtree.com>",
+  "author": "Dan Kaplun <dbkaplun@gmail.com>",
   "license": "MIT"
 }
